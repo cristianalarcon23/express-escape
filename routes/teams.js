@@ -3,8 +3,8 @@ const Team = require('../models/Team');
 const User = require('../models/User');
 
 router.get('/', async (req, res, next) =>{
-    const teams = await Team.find({});
     try {
+        const teams = await Team.find({}); 
         res.render('teams/teams', {teams});
     } catch (error) {
         next(error)

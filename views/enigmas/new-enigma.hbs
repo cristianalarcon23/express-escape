@@ -1,0 +1,20 @@
+<h2>Create a new enigma:</h2>
+<form action="/enigmas/create" method="POST">
+      <label>Title:</label>
+      <input type="text" name="title"/> 
+      <label>Number:</label>
+      <input type="number" name="number"/>
+      <label>Description:</label>
+      <input type="text" name="description"/>
+      <label>Image:</label>
+      <input type="text" name="image"/>
+      <label>Solved?:</label>
+      <input type="checkbox" name="solved"/>
+      <label>Select team:</label>
+      <select name="team" multiple>
+        {{#each teams}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <button type="submit">Add new enigma</button>
+</form>
