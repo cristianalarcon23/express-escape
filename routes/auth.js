@@ -19,13 +19,7 @@ router.post('/signup', async (req, res, next) => {
     }
 
 
-const emailRegex =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (!emailRegex.test(name)) {
-    const error = `Invalid E-Mail address. Please enter correct!`;
-    res.render("auth/signup", { error });
-    return;
-  }
+
 
   const passwordRegex =
     /(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/;
@@ -33,7 +27,7 @@ const emailRegex =
     const error = `
     Password must be at least 8 characters long, includes one or more uppercase and lowercase letters, has at least one digit,
     has one special character`;
-    res.render("auth/sign-up", { error });
+    res.render("auth/signup", { error });
     return;
   }
   try {
@@ -48,7 +42,7 @@ const emailRegex =
       name,
       hashedPassword: password,
     });
-    res.render("/");
+    res.redirect("/");
   } catch (error) {
     next(error);
   }
@@ -88,5 +82,11 @@ router.post("/login", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+  });
+
+  router.get("/logout", (req, res, next) => {
+    req.session.destroy();
+    req.app.locals.currentUser = false;
+    res.redirect("/auth/login");
   });
 module.exports= router;
