@@ -1,0 +1,17 @@
+<h2>Login to your Account</h2>
+<div>
+<form action="/auth/login" method="post">
+  <div>
+    <label for="name">Username</label>
+    <input type="text" name="name"  required />
+  </div>
+  <div>
+    <label for="hashedPassword">Password</label>
+    <input type="password" name="hashedPassword"  required />
+  </div>
+  {{#if message}}
+    <p>{{message}}</p>
+  {{/if}}
+  <button>Login</button>
+</form>
+</div>
