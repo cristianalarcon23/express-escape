@@ -1,0 +1,17 @@
+<h2>Create an Account</h2>
+<div>
+<form action="/auth/signup" method="post">
+  <div>
+    <label for="name">Username</label>
+    <input type="text" name="name"  required />
+  </div>
+  <div>
+    <label for="hashedPassword">Password</label>
+    <input type="hashedPassword" name="hashedPassword" required />
+  </div>
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
+  <button>Register</button>
+</form>
+</div>
