@@ -1,0 +1,14 @@
+<h1>Team detail:</h1>  
+<p><strong>Name:</strong> {{ team.name }}</p>
+<p><strong>Participants:</strong></p>
+{{#each team.participants}}
+<ul>
+    <li>Name:{{this.name}}</li>
+    <li>Age:{{this.age}}</li>
+    <li>Email:{{this.email}}</li>
+</ul>
+{{/each}}
+<form method="POST" action="/teams/delete/{{team._id}}">
+<button type="submit">Delete team</button>
+</form>
+<a href="/teams/edit/{{team._id}}">Edit team</a>

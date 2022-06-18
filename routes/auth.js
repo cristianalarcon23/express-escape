@@ -11,7 +11,7 @@ router.get("/login", (req, res, next) => {
   });
 
 router.post('/signup', async (req, res, next) => {
-    const {name, hashedPassword} = req.body;
+    const {name, age, email, hashedPassword} = req.body;
     if (!name || !hashedPassword) {
         const error = 'Mail or pass incorrect';
         res.render ('auth/signup', {error});
@@ -33,13 +33,15 @@ router.post('/signup', async (req, res, next) => {
   try {
     const userFound = await User.findOne({ name });
     if (userFound) {
-      const error = `E-Mail already exists`;
+      const error = `User already exists`;
       res.render("auth/signup", { error });
       return;
     }
     const password = bcrypt.hashSync(hashedPassword);
     const createdUser = await User.create({
       name,
+      age: parseInt(age),
+      email,
       hashedPassword: password,
     });
     res.redirect("/");
@@ -76,7 +78,7 @@ router.post("/login", async (req, res, next) => {
         res.redirect("/");
       } else {
         const message = `Wrong password`;
-        res.render("auth/login", { message });
+        res.render("/", { message });
         return;
       }
     } catch (error) {
